@@ -3,27 +3,17 @@ using ElevatorStruct.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ElevatorStruct
-{
-  
+{  
     public partial class MainWindow : Window
     {
         IElevator _elevator;
         ITimerSensor _timeSensor = new TimerSensor();
-        Dictionary<Enums.Direction, Button> _dictionaryFloorButton = new Dictionary<Enums.Direction, Button>();
+        Dictionary<Enums.LevelType, Button> _dictionaryFloorButton = new Dictionary<Enums.LevelType, Button>();
         Dictionary<string, Button> _dictionaryCabinButton = new Dictionary<string, Button>();
         public MainWindow()
         {
@@ -49,15 +39,14 @@ namespace ElevatorStruct
             }
             else
             {
-                int floor = (int)cmbFloor.SelectedValue;
-               // _elevator.ChangeButtonFor(floor);
-
+                int numberLevel = (int)cmbFloor.SelectedValue;
+               _elevator.ChangeLevelButtonStatus(numberLevel);
             }
         }
         public void CreateFloorButton()
         {
-            _dictionaryFloorButton.Add(Direction.up, btnUp);
-            _dictionaryFloorButton.Add(Direction.down, btnDown);
+            _dictionaryFloorButton.Add(LevelType.up, btnUp);
+            _dictionaryFloorButton.Add(LevelType.down, btnDown);
         }       
         public void CreateCabinButton()
         {
@@ -108,7 +97,6 @@ namespace ElevatorStruct
         private void btnUp_Click(object sender, RoutedEventArgs e)
         {
             var buttonClicked = sender as Button;
-
             if (cmbFloor.SelectedValue == null)
             {
                 MessageBox.Show($"Select a floor");

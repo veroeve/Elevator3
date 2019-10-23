@@ -52,14 +52,25 @@ namespace ElevatorStruct.Services
             if (elevatorDirection == Direction.up)
             {
                 islevel= IsOnLevel(_toGoUpRequests , currentLevel);
+                if(islevel)
+                {
+                    _toGoUpRequests.RemoveAll(r => r.numberFloor == currentLevel);
+                    _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
+                }
             }
             else
             {
                 islevel= IsOnLevel(_toGoDownRequests , currentLevel);
+                if (islevel)
+                {
+                    _toGoDownRequests.RemoveAll(r => r.numberFloor == currentLevel);
+                    _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
+                }
             }
             if(!islevel)
             {
                 islevel = IsOnLevel(_cabinRequests, currentLevel);
+                _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
             }
 
             return islevel;
@@ -82,11 +93,6 @@ namespace ElevatorStruct.Services
         public List<Request> GetDownRequests()
         {
             return _toGoDownRequests;
-        }
-
-        public void DeleteRequest()
-        {
-            throw new NotImplementedException();
         }
 
 

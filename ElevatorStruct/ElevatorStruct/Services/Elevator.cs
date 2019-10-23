@@ -33,7 +33,7 @@ namespace ElevatorStruct.Services
             }
         }
 
-        public void CreateFloorButton(Dictionary<Enums.Direction, Button> dictionaryButton)
+        public void CreateFloorButton(Dictionary<Enums.LevelType, Button> dictionaryButton)
         {
             foreach (var button in dictionaryButton)
             {
@@ -61,6 +61,10 @@ namespace ElevatorStruct.Services
         {
             _director.MoveElevator(_motor,_cabin,_floor);
 
+        }
+        public void ChangeLevelButtonStatus(int numberLevel)
+        {
+            _floor.ChangeButtonStatus(numberLevel);
         }
     }
 }

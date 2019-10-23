@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ElevatorStruct.Services
 {
-    public delegate void Notify(string numberFloor);
-    class LevelSensor
+
+    class LevelSensor : ILevelSensor
     {
-        private string _numberFloor;
-
-        public event Notify floorChange;
-        public void Change(string numberFloor)
+        IReviewer _reviewer;
+        public void NotifyArrival(TextBox txtElevator, int currentFloor)
         {
-            _numberFloor = numberFloor;
-
-            if (floorChange != null)
-            {
-                floorChange.Invoke(_numberFloor);
-            }
-
+            _reviewer = new Reviewer();
+            IObserver obsMotor = new Motor(txtElevator);
+            IObserver obsFloorDoor = new FloorDoor(txtElevator);
+            IObserver obsCabinDoor = new CabinDoor(txtElevator);
+            _reviewer.LevelHaveRequest += new Notify(obsMotor.Notify);
+            _reviewer.LevelHaveRequest += new Notify(obsFloorDoor.Notify);
+            _reviewer.LevelHaveRequest += new Notify(obsCabinDoor.Notify);
+            _reviewer.HaveRequest(currentFloor);
         }
     }
 }

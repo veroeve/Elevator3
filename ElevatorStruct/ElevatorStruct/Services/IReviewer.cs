@@ -8,5 +8,7 @@ namespace ElevatorStruct.Services
 {
     interface IReviewer
     {
+        event Notify LevelHaveRequest;
+        void HaveRequest(int numberFloor);
     }
 }

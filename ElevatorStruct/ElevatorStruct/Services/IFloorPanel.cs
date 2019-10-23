@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElevatorStruct.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +8,9 @@ using System.Windows.Controls;
 
 namespace ElevatorStruct.Services
 {
-    interface ILevelSensor
+    interface IFloorPanel
     {
-        void NotifyArrival(TextBox txtElevator, int currentFloor);
+        void CreateButton(LevelType direction, Button button);
+        void ChangeButtonStatus(LevelType type);
     }
 }

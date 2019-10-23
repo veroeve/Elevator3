@@ -59,22 +59,29 @@
     <Compile Include="Services\Cabin.cs" />
     <Compile Include="Services\CabinButton.cs" />
     <Compile Include="Services\CabinDisplay.cs" />
+    <Compile Include="Services\CabinDoor.cs" />
     <Compile Include="Services\DirectionManager.cs" />
     <Compile Include="Services\Director.cs" />
     <Compile Include="Services\Elevator.cs" />
     <Compile Include="Services\Floor.cs" />
     <Compile Include="Services\FloorButton.cs" />
+    <Compile Include="Services\FloorDoor.cs" />
     <Compile Include="Services\FloorLevel.cs" />
+    <Compile Include="Services\FloorPanel.cs" />
     <Compile Include="Services\ICabin.cs" />
     <Compile Include="Services\IDirectionManager.cs" />
     <Compile Include="Services\IDirector.cs" />
+    <Compile Include="Services\IDoor.cs" />
     <Compile Include="Services\IElevator.cs" />
     <Compile Include="Services\IFloor.cs" />
     <Compile Include="Services\FloorDisplay.cs" />
+    <Compile Include="Services\IFloorButton.cs" />
+    <Compile Include="Services\IFloorPanel.cs" />
     <Compile Include="Services\ILevelSensor.cs" />
     <Compile Include="Services\IMotionSensor.cs" />
     <Compile Include="Services\IMotor.cs" />
     <Compile Include="Services\INotify.cs" />
+    <Compile Include="Services\IObserver.cs" />
     <Compile Include="Services\IRequestManager.cs" />
     <Compile Include="Services\IReviewer.cs" />
     <Compile Include="Services\ITimerSensor.cs" />
@@ -83,6 +90,7 @@
     <Compile Include="Services\Motor.cs" />
     <Compile Include="Services\Request.cs" />
     <Compile Include="Services\RequestManager.cs" />
+    <Compile Include="Services\Reviewer.cs" />
     <Compile Include="Services\TimerSensor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

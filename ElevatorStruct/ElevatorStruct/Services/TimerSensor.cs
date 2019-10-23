@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
@@ -18,6 +19,13 @@ namespace ElevatorStruct.Services
             {
                 elevator.MoveElevator();
             };
+            dispathcer.Start();
+        }
+
+        public void Stop()
+        {
+            dispathcer.Stop();
+            Thread.Sleep(3000);
             dispathcer.Start();
         }
     }

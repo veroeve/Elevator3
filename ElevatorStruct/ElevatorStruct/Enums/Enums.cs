@@ -18,4 +18,9 @@ namespace ElevatorStruct.Enums
         down,
         both
     }
+    public enum DoorState
+    {
+        open,
+        close
+    }
 }

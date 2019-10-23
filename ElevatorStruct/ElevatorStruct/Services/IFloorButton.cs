@@ -7,8 +7,10 @@ using System.Windows.Controls;
 
 namespace ElevatorStruct.Services
 {
-    interface ILevelSensor
+    interface IFloorButton
     {
-        void NotifyArrival(TextBox txtElevator, int currentFloor);
+        void HideButton(Button button);
+        void ShowButton(Button button);
+
     }
 }

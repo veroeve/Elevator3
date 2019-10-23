@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace ElevatorStruct.Services
 {
-    class Motor:IMotor
+    class Motor:IMotor,IObserver
     {
         TextBox _txtElevator;
         public Motor(TextBox txtElevator)
@@ -29,9 +29,14 @@ namespace ElevatorStruct.Services
             return cabinheight;
         }
 
-        public void Stop(string numberFloor)
+        public void Notify(int numberFloor)
         {
-            throw new NotImplementedException();
+            Stop(numberFloor);
+        }
+
+        public void Stop(int numberFloor)
+        {
+            _txtElevator.AppendText($"Motor Stopped on the floor:{numberFloor} \r\n");
         }
     }
 }

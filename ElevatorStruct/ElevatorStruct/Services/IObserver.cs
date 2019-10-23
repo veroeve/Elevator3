@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace ElevatorStruct.Services
 {
-    interface ILevelSensor
+    interface IObserver
     {
-        void NotifyArrival(TextBox txtElevator, int currentFloor);
+        void Notify(int numberFloor);
     }
 }

@@ -14,6 +14,8 @@ namespace ElevatorStruct.Services
         IRequestManager _requestManager= new RequestManager();
         IMotionSensor _motionSensor = new MotionSensor();
         IDirectionManager _directionManager = new DirectionManager();
+        ILevelSensor _levelSensor = new LevelSensor();
+        ITimerSensor _timerSensor = new TimerSensor();
         int _currentLevel;        
         TextBox _txtElevator;
         
@@ -38,11 +40,22 @@ namespace ElevatorStruct.Services
         {
             if(_requestManager.HasAnyRequest())
             {
+                DoorState tempstate = cabin.GetDoorState();
+                if(tempstate == DoorState.open)
+                {
+                    _timerSensor.Stop();
+                    cabin.UpdateDoorState(DoorState.close);
+                    floor.UpdateDoorState(DoorState.close);
+                }
                 _elevatorDirection = _directionManager.EnsureDirection(_currentLevel,_elevatorDirection, _requestManager);
                 _motionSensor.MoveCabin(motor, cabin, _elevatorDirection);
                 _currentLevel = floor.GetLevel(cabin);
                 cabin.ShowLevel(_currentLevel);
                 floor.ShowLevel(_currentLevel);
+                if(_requestManager.FloorHaveRequest(_currentLevel,_elevatorDirection))
+                {
+                    _levelSensor.NotifyArrival(_txtElevator, _currentLevel);
+                }
             }
     
         }

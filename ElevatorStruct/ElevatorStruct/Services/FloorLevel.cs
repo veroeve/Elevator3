@@ -18,6 +18,12 @@ namespace ElevatorStruct.Services
             set { value = _heightLevel; }
 
         }
+        public LevelType type
+        {
+            get { return _type; }
+            set { value = _type; }
+
+        }
         public int numberLevel
         {
             get { return _numberLevel; }

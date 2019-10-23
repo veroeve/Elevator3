@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using ElevatorStruct.Enums;
 
 namespace ElevatorStruct.Services
 {
@@ -11,6 +12,7 @@ namespace ElevatorStruct.Services
     {
         List<CabinButton> _cabinButtons = new List<CabinButton>();
         CabinDisplay _cabinDisplay;
+        IDoor _cabinDoor;
         TextBox _txtElevator;
         int _cabinHeight;
         int _numberFloor;
@@ -18,6 +20,7 @@ namespace ElevatorStruct.Services
         {
             _txtElevator = txtElevator;
             _cabinHeight = height;
+            _cabinDoor = new CabinDoor(_txtElevator);
         }
         public void CreateButton(string nameButton, Button button)
         {
@@ -40,6 +43,17 @@ namespace ElevatorStruct.Services
         public void ShowLevel(int Level)
         {
             _cabinDisplay.display.Content = Level;
+        }
+
+        public DoorState GetDoorState()
+        {
+           return _cabinDoor.GetDoorState();
+           
+        }
+
+        public void UpdateDoorState(DoorState state)
+        {
+            _cabinDoor.UpdateDoorState(state);
         }
     }
 }

@@ -10,20 +10,19 @@ namespace ElevatorStruct.Services
 {
     class Floor : IFloor
     {
-        List<FloorButton> _floorButtons = new List<FloorButton>();
-        List<int> _pointers = new List<int>();
+        IFloorPanel _floorPanel = new FloorPanel();       
         List<FloorLevel> _floorLevels = new List<FloorLevel>();
         FloorDisplay _floorDisplay;
+        IDoor _floorDoor;     
         TextBox _txtElevator;
-        int total = 0;
         public Floor(TextBox txtElevator)
         {
             _txtElevator = txtElevator;
+            _floorDoor = new FloorDoor(_txtElevator);
         }
-        public void CreateButton(Direction direction, Button button)
+        public void CreateButton(LevelType direction, Button button)
         {
-            _floorButtons.Add(new FloorButton(direction, button));
-
+            _floorPanel.CreateButton(direction, button);
         }
 
         public void CreateDisplay(Label display)
@@ -34,7 +33,7 @@ namespace ElevatorStruct.Services
         public void CreateLevel(int numberLevel, int heightLevel, LevelType type)
         {
             _floorLevels.Add(new FloorLevel(numberLevel, heightLevel, type));
-            _pointers.Add(total + heightLevel);
+           
         }
     
         public int GetLevel(ICabin cabin)
@@ -56,6 +55,19 @@ namespace ElevatorStruct.Services
         {
             _floorDisplay.display.Content = Level;
         }
-
+        public void UpdateDoorState(DoorState state)
+        {
+            _floorDoor.UpdateDoorState(state);
+        }
+        public void ChangeButtonStatus(int numberLevel)
+        {
+            foreach(var item in _floorLevels)
+            {
+                if(item.numberLevel== numberLevel)
+                {
+                    _floorPanel.ChangeButtonStatus(item.type);
+                }
+            }           
+        }
     }
 }

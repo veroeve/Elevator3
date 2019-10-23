@@ -9,5 +9,6 @@ namespace ElevatorStruct.Services
     interface ITimerSensor
     {
         void Star(IElevator elevator);
+        void Stop();
     }
 }

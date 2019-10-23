@@ -10,6 +10,6 @@ namespace ElevatorStruct.Services
     {
         int MotorUp(int cabinheight);
         int MotorDown(int cabinheight);
-        void Stop(string numberFloor);
+        void Stop(int numberFloor);
     }
 }
