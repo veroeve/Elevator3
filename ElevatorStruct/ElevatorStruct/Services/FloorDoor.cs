@@ -40,6 +40,15 @@ namespace ElevatorStruct.Services
         public void UpdateDoorState(DoorState state)
         {
             _state = state;
+            if(_state==DoorState.close)
+            {
+                _txtElevator.AppendText($"Closing level door \r\n");
+            }
+            else
+            {
+                _txtElevator.AppendText($"Opening level door \r\n");
+            }
+            
         }
     }
 }

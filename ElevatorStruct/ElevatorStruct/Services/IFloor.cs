@@ -13,7 +13,7 @@ namespace ElevatorStruct.Services
         void CreateButton(LevelType nameButton, Button button);
         void CreateLevel(int numberLevel,int heightLevel,LevelType type);
         void CreateDisplay(Label display);
-        int GetLevel(ICabin cabin);
+        int GetLevel(ICabin cabin, Direction elevatorDirecion, int currentFloor);
         void ShowLevel(int Level);
         void UpdateDoorState(DoorState state);
         void ChangeButtonStatus(int numberLevel);

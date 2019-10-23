@@ -60,6 +60,7 @@
     <Compile Include="Services\CabinButton.cs" />
     <Compile Include="Services\CabinDisplay.cs" />
     <Compile Include="Services\CabinDoor.cs" />
+    <Compile Include="Services\CabinPanel.cs" />
     <Compile Include="Services\DirectionManager.cs" />
     <Compile Include="Services\Director.cs" />
     <Compile Include="Services\Elevator.cs" />
@@ -69,6 +70,8 @@
     <Compile Include="Services\FloorLevel.cs" />
     <Compile Include="Services\FloorPanel.cs" />
     <Compile Include="Services\ICabin.cs" />
+    <Compile Include="Services\ICabinButton.cs" />
+    <Compile Include="Services\ICabinPanel.cs" />
     <Compile Include="Services\IDirectionManager.cs" />
     <Compile Include="Services\IDirector.cs" />
     <Compile Include="Services\IDoor.cs" />

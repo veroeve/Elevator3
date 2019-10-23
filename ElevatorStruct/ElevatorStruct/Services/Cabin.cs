@@ -10,21 +10,20 @@ namespace ElevatorStruct.Services
 {
     public class Cabin : ICabin
     {
-        List<CabinButton> _cabinButtons = new List<CabinButton>();
+        ICabinPanel _cabinPanel = new  CabinPanel();
         CabinDisplay _cabinDisplay;
         IDoor _cabinDoor;
         TextBox _txtElevator;
         int _cabinHeight;
-        int _numberFloor;
         public Cabin(TextBox txtElevator, int height)
         {
             _txtElevator = txtElevator;
             _cabinHeight = height;
             _cabinDoor = new CabinDoor(_txtElevator);
         }
-        public void CreateButton(string nameButton, Button button)
+        public void CreateCabinButton(string nameButton, Button button)
         {
-            _cabinButtons.Add(new CabinButton(nameButton,button));
+            _cabinPanel.CreateButton(nameButton, button);
         }
         public void CreateDisplay(Label display)
         {
@@ -54,6 +53,11 @@ namespace ElevatorStruct.Services
         public void UpdateDoorState(DoorState state)
         {
             _cabinDoor.UpdateDoorState(state);
+        }
+
+        public void changeColorCabinButton(string numberfloor)
+        {
+            _cabinPanel.TurnOffCabinButtonForFloor(numberfloor);
         }
     }
 }

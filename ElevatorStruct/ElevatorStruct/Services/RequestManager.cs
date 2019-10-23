@@ -51,20 +51,24 @@ namespace ElevatorStruct.Services
             bool islevel = false;
             if (elevatorDirection == Direction.up)
             {
-                islevel= IsOnLevel(_toGoUpRequests , currentLevel);
-                if(islevel)
+                if(_toGoUpRequests.Count>0)
                 {
-                    _toGoUpRequests.RemoveAll(r => r.numberFloor == currentLevel);
-                    _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
+                    islevel = ReviewUpRequests(currentLevel);                   
                 }
+                else
+                {
+                    islevel = ReviewDownRequests(currentLevel);
+                }             
             }
             else
             {
-                islevel= IsOnLevel(_toGoDownRequests , currentLevel);
-                if (islevel)
+               if(_toGoDownRequests.Count>0)
                 {
-                    _toGoDownRequests.RemoveAll(r => r.numberFloor == currentLevel);
-                    _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
+                    islevel = ReviewDownRequests(currentLevel);
+                }
+                else
+                {
+                    islevel = ReviewUpRequests(currentLevel);
                 }
             }
             if(!islevel)
@@ -73,6 +77,28 @@ namespace ElevatorStruct.Services
                 _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
             }
 
+            return islevel;
+        }
+        private bool ReviewUpRequests(int currentLevel)
+        {
+            bool islevel = false;
+            islevel = IsOnLevel(_toGoUpRequests, currentLevel);
+            if (islevel)
+            {
+                _toGoUpRequests.RemoveAll(r => r.numberFloor == currentLevel);
+                _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
+            }
+            return islevel;
+        }
+        private bool ReviewDownRequests(int currentLevel)
+        {
+            bool islevel = false;
+            islevel = IsOnLevel(_toGoDownRequests, currentLevel);
+            if (islevel)
+            {
+                _toGoDownRequests.RemoveAll(r => r.numberFloor == currentLevel);
+                _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
+            }
             return islevel;
         }
         private bool IsOnLevel(List<Request> TempRequests, int currentLevel)
@@ -98,3 +124,32 @@ namespace ElevatorStruct.Services
 
     }
 }
+//public bool FloorHaveRequest(int currentLevel, Direction elevatorDirection)
+//{
+//    bool islevel = false;
+//    if (elevatorDirection == Direction.up)
+//    {
+//        islevel = IsOnLevel(_toGoUpRequests, currentLevel);
+//        if (islevel)
+//        {
+//            _toGoUpRequests.RemoveAll(r => r.numberFloor == currentLevel);
+//            _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
+//        }
+//    }
+//    else
+//    {
+//        islevel = IsOnLevel(_toGoDownRequests, currentLevel);
+//        if (islevel)
+//        {
+//            _toGoDownRequests.RemoveAll(r => r.numberFloor == currentLevel);
+//            _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
+//        }
+//    }
+//    if (!islevel)
+//    {
+//        islevel = IsOnLevel(_cabinRequests, currentLevel);
+//        _cabinRequests.RemoveAll(r => r.numberFloor == currentLevel);
+//    }
+
+//    return islevel;
+//}

@@ -21,6 +21,7 @@ namespace ElevatorStruct.Services
         public CabinDoor(TextBox text)
         {
             _txtElevator = text;
+            _state = DoorState.close;
         }
         public void Close(int numberFloor)
         {

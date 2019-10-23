@@ -13,14 +13,14 @@ namespace ElevatorStruct.Services
         {
             if (elevatorDirection == Direction.up)
             {
-                return ChangeUpDirection(currentFloor, requestManager.GetUpRequests());
+                return ChangeUpDirection(currentFloor, requestManager.GetUpRequests(),requestManager);
             }
             else
             {
-                return ChangeDownDirection(currentFloor, requestManager.GetDownRequests());
+                return ChangeDownDirection(currentFloor, requestManager.GetDownRequests(), requestManager);
             }
         }
-        private Direction ChangeUpDirection(int currentFloor, List<Request> toGoUpRequests)
+        private Direction ChangeUpDirection(int currentFloor, List<Request> toGoUpRequests, IRequestManager requestManager)
         {
             if (toGoUpRequests.Count > 0)
             {
@@ -35,10 +35,15 @@ namespace ElevatorStruct.Services
             }
             else
             {
+                if(requestManager.GetDownRequests().Count>0)
+                {
+                    return ChangeDownDirection( currentFloor, requestManager.GetDownRequests(), requestManager);
+                }
+
                 return Direction.down;
             }
         }
-        private Direction ChangeDownDirection(int currentFloor, List<Request> toGoDownRequests)
+        private Direction ChangeDownDirection(int currentFloor, List<Request> toGoDownRequests, IRequestManager requestManager)
         {
             if (toGoDownRequests.Count > 0)
             {
@@ -53,6 +58,10 @@ namespace ElevatorStruct.Services
             }
             else
             {
+                if(requestManager.GetUpRequests().Count > 0)
+                {
+                    return ChangeUpDirection(currentFloor, requestManager.GetUpRequests(), requestManager);
+                }
                 return Direction.up;
             }
         }

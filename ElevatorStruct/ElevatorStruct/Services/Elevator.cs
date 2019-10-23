@@ -29,7 +29,7 @@ namespace ElevatorStruct.Services
         {
             foreach (var button in dictionaryButton)
             {
-                _cabin.CreateButton(button.Key, button.Value);
+                _cabin.CreateCabinButton(button.Key, button.Value);
             }
         }
 
@@ -66,5 +66,7 @@ namespace ElevatorStruct.Services
         {
             _floor.ChangeButtonStatus(numberLevel);
         }
+
+      
     }
 }

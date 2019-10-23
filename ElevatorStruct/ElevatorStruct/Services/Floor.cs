@@ -32,24 +32,53 @@ namespace ElevatorStruct.Services
 
         public void CreateLevel(int numberLevel, int heightLevel, LevelType type)
         {
-            _floorLevels.Add(new FloorLevel(numberLevel, heightLevel, type));
-           
+            _floorLevels.Add(new FloorLevel(numberLevel, heightLevel, type));           
         }
     
-        public int GetLevel(ICabin cabin)
+        public int GetLevel(ICabin cabin, Direction elevatorDirecion, int currentFloor)
         {
-            int totals = 0;
-            int level = 0;
             int cabinHeight = cabin.GetHeight();
-            foreach (var item in _floorLevels)
+            int heightFloor = getfloorheigth(currentFloor);
+            if (elevatorDirecion == Direction.up)
             {
-                totals = totals + item.heightLevel;
-                if (totals < cabinHeight)
+                currentFloor = GoUp(cabin, heightFloor, cabinHeight, currentFloor);               
+            }
+            else
+            {
+                currentFloor = GoDown(cabin,cabinHeight, currentFloor);
+                          
+            } 
+            return currentFloor;
+        }
+
+        private int getfloorheigth(int currentFloor)
+        {
+            foreach(var item in _floorLevels)
+            {
+                if(item.numberLevel==currentFloor)
                 {
-                    level = item.numberLevel;
+                    return item.heightLevel;
                 }
             }
-            return level;
+            return 0;
+        }
+        private int GoUp(ICabin cabin,int heightFloor, int cabinHeight, int currentFloor)
+        {
+            if (cabinHeight > heightFloor)
+            {
+                cabin.UpdateHeight(0);
+                return currentFloor = currentFloor + 1;               
+            }
+            return currentFloor;
+        }
+        private int  GoDown(ICabin cabin,int cabinHeight, int currentFloor)
+        {
+            if (cabinHeight < 0)
+            {
+                cabin.UpdateHeight(getfloorheigth(currentFloor));
+                return currentFloor = currentFloor - 1;                
+            }
+            return currentFloor;
         }
         public void ShowLevel(int Level)
         {
